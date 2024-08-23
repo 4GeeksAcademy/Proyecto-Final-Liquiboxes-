@@ -40,6 +40,8 @@ setup_commands(app)
 # Add all endpoints form the API with a "api" prefix
 app.register_blueprint(api, url_prefix='/api')
 
+######## TODO Hablar con el equipo para la organización de los archivos de las rutas (estructura del proyecto)
+
 # Handle/serialize errors like a JSON object
 
 
