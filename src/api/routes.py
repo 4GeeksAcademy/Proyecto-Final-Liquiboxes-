@@ -20,3 +20,9 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+@api.route('/user', methods=['GET'])
+def get_all_users():
+    users = User.query.all()
+    
+    return jsonify(users), 200
