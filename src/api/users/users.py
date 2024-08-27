@@ -18,9 +18,12 @@ CORS(users)
 def get_all_users():
     users = User.query.all()
     
-    return jsonify(users), 200
+    # Serializa cada objeto en la lista de usuarios
+    serialized_users = [user.serialize() for user in users]
 
-@users.route('/registrar', methods=['POST'])
+    return jsonify(serialized_users), 200
+
+@users.route('/register', methods=['POST'])
 def create_user():
     data = request.get_json()
     email = data.get('email')
