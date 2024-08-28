@@ -1,38 +1,32 @@
 {
-	"name": "Python 3 & PostgreSQL",
-	"dockerComposeFile": "docker-compose.yml",
-	"service": "app",
-	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-	"features": {
-		"ghcr.io/devcontainers/features/github-cli:1": {
-			"installDirectlyFromGitHubRelease": true,
-			"version": "latest"
-		},
-		"ghcr.io/devcontainers/features/node:1": {
-			"nodeGypDependencies": true,
-			"version": "lts"
-		}
-	},
+    "name": "Python 3 & PostgreSQL",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    "features": {
+        "ghcr.io/devcontainers/features/github-cli:1": {
+            "installDirectlyFromGitHubRelease": true,
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers/features/node:1": {
+            "nodeGypDependencies": true,
+            "version": "lts"
+        }
+    },
 
-	"forwardPorts": [3000, 3001, 5432],
+    "forwardPorts": [3000, 3001, 5432],
 
-	"initializeCommand": "echo 'Initializing dev container...'",
+    "postCreateCommand": "pipenv install && python docs/assets/greeting.py both > /workspaces/.codespaces/shared/first-run-notice.txt && npm install",
 
-	"onCreateCommand": "bash -c '(cp .env.example .env || echo \".env creation failed\") && (pipenv install || echo \"pipenv install failed\") && (bash database.sh || echo \"database.sh failed\")'",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-toolsai.jupyter"
+            ]
+        }
+    },
 
-	"postCreateCommand": "bash -c 'python docs/assets/greeting.py both > /workspaces/.codespaces/shared/first-run-notice.txt && npm install'",
-
-	"postStartCommand": "echo 'Dev container started successfully!'",
-
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"ms-python.python",
-				"ms-python.vscode-pylance",
-				"ms-toolsai.jupyter"
-			]
-		}
-	},
-
-	"remoteUser": "vscode"
+    "remoteUser": "vscode"
 }
