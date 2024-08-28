@@ -32,7 +32,7 @@ def create_user():
     # Verifica si el usuario ya existe
     user = User.query.filter_by(email=email).first()
     if user:
-        return jsonify({'error': 'User already exists'}), 400
+        return jsonify({'error': 'User already exists'}), 400 ## MIRAR ERROR NO SE ENVIA BIEN
 
     # Crea un nuevo usuario
     user = User(email=email)
