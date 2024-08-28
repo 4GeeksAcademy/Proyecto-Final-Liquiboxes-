@@ -10,16 +10,15 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN pip install pipenv
 
 # Set work directory
-WORKDIR /workspaces
+WORKDIR /workspaces/${localWorkspaceFolderBasename}
 
-# Copy Pipfile and Pipfile.lock
-COPY Pipfile Pipfile.lock ./
+# Copy Pipfile and Pipfile.lock from the root of the project
+COPY ../Pipfile ../Pipfile.lock ./
 
 # Install dependencies
 RUN pipenv install --system --deploy
 
-# Copy the rest of the code
-COPY . .
+# We'll copy the rest of the code in the docker-compose file
 
 # Command to run on container start
 CMD ["sleep", "infinity"]
