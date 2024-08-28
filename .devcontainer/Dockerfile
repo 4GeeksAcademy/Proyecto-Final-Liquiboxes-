@@ -1,22 +1,14 @@
-FROM mcr.microsoft.com/devcontainers/python:3.10
+FROM python:3.10
 
 ENV PYTHONUNBUFFERED 1
 
-# Install system dependencies
-RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-    && apt-get -y install --no-install-recommends \
-        postgresql-client \
-        libpq-dev \
-        gcc \
-        python3-dev
+RUN apt-get update && apt-get install -y \
+    postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /workspaces
+WORKDIR /workspaces/${localWorkspaceFolderBasename}
 
-# Copy requirements file
 COPY requirements.txt .
-
-# Install Python dependencies
-RUN pip install --upgrade pip \
-    && pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
 CMD ["sleep", "infinity"]
