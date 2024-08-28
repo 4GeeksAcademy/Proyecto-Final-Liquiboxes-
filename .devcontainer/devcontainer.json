@@ -9,7 +9,7 @@
         "ghcr.io/devcontainers/features/node:1": "lts"
     },
 
-    "forwardPorts": [5432],
+    "forwardPorts": [5000, 5432],
 
     "postCreateCommand": "pip install --user -r requirements.txt",
 
@@ -17,7 +17,8 @@
         "vscode": {
             "extensions": [
                 "ms-python.python",
-                "ms-python.vscode-pylance"
+                "ms-python.vscode-pylance",
+                "ms-toolsai.jupyter"
             ]
         }
     },
